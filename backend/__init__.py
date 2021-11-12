@@ -10,8 +10,9 @@ def create_app():
         return render_template('base.html')
 
     # Register all Flask BluePrints
-    from backend import dns
-    app.register_blueprint(dns.dns_bp)
+    from backend import dns_plugin, whois_plugin
+    app.register_blueprint(dns_plugin.dns_bp)
+    app.register_blueprint(whois_plugin.whois_bp)
 
     return app
 
