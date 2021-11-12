@@ -1,6 +1,22 @@
 <template>
   <div class="hello">
-    <h1>Hyperion OSINT System</h1>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <title>Hyperion OSINT System</title>
+    </head>
+    <h3>Enter domain name</h3>
+    <input type="text" name="main-text-box">
+    <input type="submit" name="submit-button">
   </div>
 </template>
+
+<style>
+    #app {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+    }
+</style>
 
