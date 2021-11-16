@@ -6,9 +6,31 @@
     </head>
     <h3>Enter domain name</h3>
     <input type="text" name="main-text-box">
-    <input type="submit" name="submit-button">
+      <button @click="fetchData">Fetch</button>
   </div>
 </template>
 
+<script>
+import axios from 'axios'
 
+const backendURL = "http://localhost:5000/whois?domain=ynet.com"
+
+export default {
+  props: {
+  },
+  data(){
+    return{
+      whoisData: null
+    }
+  },
+  methods: {
+    fetchData: function(){
+      console.log("before")
+      axios.get(backendURL).then(response => (this.whoisData = response))
+      console.log("after")
+      console.log(this.whoisData)
+    }
+  }
+}
+</script>
 
