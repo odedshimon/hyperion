@@ -5,29 +5,33 @@
         <title>Hyperion OSINT System</title>
     </head>
     <h3>Enter domain name</h3>
-    <input type="text" name="domain-text-box" id="domain-text-box">
+    <input type="text" name="domain-text-box" id="domain-text-box" ref="domain">
     <button @click="fetchData">Fetch</button>
-    <label>{{ whoisData }}</label>
+    <json-viewer :value="whoisData"></json-viewer>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
+import JsonViewer from 'vue-json-viewer'
 
 const backendURL = "http://localhost:5000/whois?domain="
+
+Vue.use(JsonViewer)
 
 export default {
   props: {
   },
   data(){
     return{
-      whoisData: [],
-      domain: ""
+      whoisData: '',
+      domain: ''
     }
   },
   methods: {
     fetchData: async function(){
-      this.domain = document.getElementById('domain-text-box').value
+      this.domain = this.$refs.domain.value
       console.log("Sending request to backend")
       const response = await axios.get(backendURL + this.domain)
       this.whoisData = response.data
