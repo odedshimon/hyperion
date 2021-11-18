@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="home">
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
         <title>Hyperion OSINT System</title>
@@ -7,7 +7,10 @@
     <h3>Enter domain name</h3>
     <input type="text" name="domain-text-box" id="domain-text-box" ref="domain">
     <button @click="fetchData">Fetch</button>
-    <json-viewer :value="whoisData"></json-viewer>
+    <div class="reults-container">
+      <json-viewer :value="whoisData"></json-viewer>
+      <json-viewer :value="whoisData"></json-viewer>
+    </div>
   </div>
 </template>
 
@@ -41,3 +44,17 @@ export default {
 }
 </script>
 
+<style>
+.home{
+  margin-left: 30px;
+}
+.jv-number-float {
+  color: #faa !important;
+}
+.jv-key-node {
+  display: flex;
+}
+.reults-container {
+  display: flex;
+}
+</style>
