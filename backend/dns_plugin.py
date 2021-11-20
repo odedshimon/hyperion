@@ -1,7 +1,3 @@
-import dns.message
-import dns.rdataclass
-import dns.rdatatype
-import dns.query
 import dns.resolver
 from flask import Blueprint, request
 
