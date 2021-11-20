@@ -9,7 +9,7 @@
     <button @click="fetchData">Fetch</button>
     <div class="reults-container">
       <json-viewer :value="whoisData"></json-viewer>
-      <json-viewer :value="whoisData"></json-viewer>
+      <json-viewer :value="dnsData"></json-viewer>
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import JsonViewer from 'vue-json-viewer'
 
-const backendURL = "http://localhost:5000/whois?domain="
+const backendURL = "http://localhost:5000/"
 
 Vue.use(JsonViewer)
 
@@ -28,16 +28,20 @@ export default {
   },
   data(){
     return{
+      domain: '',
       whoisData: '',
-      domain: ''
+      dnsData: ''
     }
   },
   methods: {
     fetchData: async function(){
       this.domain = this.$refs.domain.value
+      const domainParam = "?domain=" + this.domain
       console.log("Sending request to backend")
-      const response = await axios.get(backendURL + this.domain)
-      this.whoisData = response.data
+      const whoisResponse = await axios.get(backendURL + "whois" + domainParam)
+      const dnsResponse = await axios.get(backendURL + "dns" + domainParam)
+      this.whoisData = whoisResponse.data
+      this.dnsData = dnsResponse.data
       console.log("Response accepted from backend")
     }
   }
