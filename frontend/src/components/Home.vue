@@ -9,7 +9,7 @@
     <button @click="fetchData">Fetch</button>
     <div class="reults-container">
       <json-viewer :value="whoisData"></json-viewer>
-      <json-viewer :value="whoisData"></json-viewer>
+      <json-viewer :value="dnsData"></json-viewer>
     </div>
   </div>
 </template>
@@ -28,16 +28,17 @@ export default {
   },
   data(){
     return{
+      domain: '',
       whoisData: '',
-      domain: ''
+      dnsData: ''
     }
   },
   methods: {
     fetchData: async function(){
       this.domain = this.$refs.domain.value
       console.log("Sending request to backend")
-      const response = await axios.get(backendURL + this.domain)
-      this.whoisData = response.data
+      const whoisResponse = await axios.get(backendURL + this.domain)
+      this.whoisData = whoisResponse.data
       console.log("Response accepted from backend")
     }
   }
