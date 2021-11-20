@@ -19,7 +19,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import JsonViewer from 'vue-json-viewer'
 
-const backendURL = "http://localhost:5000/whois?domain="
+const backendURL = "http://localhost:5000/"
 
 Vue.use(JsonViewer)
 
@@ -36,9 +36,12 @@ export default {
   methods: {
     fetchData: async function(){
       this.domain = this.$refs.domain.value
+      const domainParam = "?domain=" + this.domain
       console.log("Sending request to backend")
-      const whoisResponse = await axios.get(backendURL + this.domain)
+      const whoisResponse = await axios.get(backendURL + "whois" + domainParam)
+      const dnsResponse = await axios.get(backendURL + "dns" + domainParam)
       this.whoisData = whoisResponse.data
+      this.dnsData = dnsResponse.data
       console.log("Response accepted from backend")
     }
   }
