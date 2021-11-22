@@ -13,6 +13,7 @@ def get_dns_data():
     resolver.nameservers = ['8.8.8.8']
 
     res = {}
+
     for qtype in DNS_QUERY_TYPES:
         try:
             answers = resolver.resolve(domain, qtype)

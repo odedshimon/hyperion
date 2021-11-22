@@ -1,15 +1,8 @@
 # To run this celery worker from shell type: celery -A celery_worker.celery_app worker --loglevel=info
 
 from celery import Celery
-
-try:
-    from backend.flask_server import flask_app
-except:
-    # TODO: just a workaround, solve this import while using the celery command from shell
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-    from backend.flask_server import flask_app
+import whois
+from hyperion_backend.flask_server import flask_app
 
 
 def make_celery(flask_app):
@@ -31,7 +24,6 @@ def make_celery(flask_app):
 celery_app = make_celery(flask_app)
 
 
-@celery_app.task()
+@celery_app.task
 def get_whois_data_async(domain):
-    import whois
     return whois.whois(domain)

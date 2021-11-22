@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template
+from . import dns_plugin, whois_plugin
 
 
 def create_app():
@@ -16,7 +17,6 @@ def create_app():
         return render_template('base.html')
 
     # Register all Flask BluePrints
-    from backend import dns_plugin, whois_plugin
     flask_app.register_blueprint(dns_plugin.dns_bp)
     flask_app.register_blueprint(whois_plugin.whois_bp)
 
