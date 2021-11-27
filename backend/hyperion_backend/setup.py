@@ -40,7 +40,7 @@ setup(
     include_package_data=True,
     keywords='hyperion_backend',
     name='hyperion_backend',
-    packages=find_packages(include=['backend', 'hyperion_backend']),
+    packages=find_packages(),
     # setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
