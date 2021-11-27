@@ -1,7 +1,3 @@
-import dns.message
-import dns.rdataclass
-import dns.rdatatype
-import dns.query
 import dns.resolver
 from flask import Blueprint, request
 
@@ -23,5 +19,8 @@ def get_dns_data():
             res[qtype] = [str(a) for a in answers]
         except dns.resolver.NoAnswer as e:
             print(f"No DNS records of type {qtype} for {domain}")
+        except Exception as e:
+            print(f"Failed to fetch DNS data for {domain}: {e}")
+            break
 
     return res
