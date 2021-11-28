@@ -35,13 +35,23 @@ export default {
   },
   methods: {
     fetchData: async function(){
+
+      // Get domain from text box.
       this.domain = this.$refs.domain.value
       const domainParam = "?domain=" + this.domain
+
+      // Asynchronously query backend handlers.
+      const whoisRequest = axios.get(backendURL + "whois" + domainParam);
+      const dnsRequest = axios.get(backendURL + "dns" + domainParam);
+
       console.log("Sending request to backend")
-      const whoisResponse = await axios.get(backendURL + "whois" + domainParam)
-      const dnsResponse = await axios.get(backendURL + "dns" + domainParam)
-      this.whoisData = whoisResponse.data
-      this.dnsData = dnsResponse.data
+      axios.all([whoisRequest, dnsRequest]).then(axios.spread((...responses) => {
+        this.whoisData = responses[0].data
+        this.dnsData = responses[1].data
+      })).catch(errors => {
+        // react on errors.
+        console.log(errors)
+      })
       console.log("Response accepted from backend")
     }
   }
